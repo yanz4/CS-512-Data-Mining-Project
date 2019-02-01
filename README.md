@@ -1,1 +1,1 @@
-# CS-543-Computer-Vision-Project
+# CS-512-Data-Mining-Project
