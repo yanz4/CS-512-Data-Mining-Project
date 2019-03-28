@@ -43,7 +43,7 @@ def evaluate(dataname='NYT', json_dir='./results_baseline/'):
         f.write(str(class_order).replace(',', '\n'))
 
 
-def main(dataname, data_dir='../../data/', threads='1'):
+def main(dataname, data_dir='../data/', threads='1'):
 
     classes = data_dir + dataname + '/classes/'
     queries = data_dir + dataname + '/queries/'

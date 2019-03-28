@@ -192,7 +192,7 @@ class read_data:
 
     def loadall(self):
         print(self.file)
-        folder = '../../data/' + self.file + '/'
+        folder = '../data/' + self.file + '/'
         self.loadEidToEntityMap(folder + 'vocab.txt')
         self.loadEidToEmbeddingMap(folder + 'eid2embed.txt')
         self.loadEidAndFeatureMap(folder)

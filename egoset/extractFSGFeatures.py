@@ -83,15 +83,15 @@ def updateMapFromList(fromList, toMap):
 
 def main(dataname):
     print('%s starts!'%dataname)
-    infilename = '../../data/'+dataname+'/corpus.txt'
-    fo = '../../data/'+dataname+'/eidFSGCounts.txt'
+    infilename = '../data/'+dataname+'/corpus.txt'
+    fo = '../data/'+dataname+'/eidFSGCounts.txt'
 
     if os.path.isfile(fo):
         print('FSGCounts file of %s corpus already exists!'%dataname)
         return None
 
     entity2eid = dict()
-    with open('../../data/'+dataname+'/vocab.txt', 'r') as fin:
+    with open('../data/'+dataname+'/vocab.txt', 'r') as fin:
         for line in fin:
             entity2eid[line.strip().split('\t')[0]] = int(line.strip().split('\t')[1])
 

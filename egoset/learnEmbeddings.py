@@ -19,7 +19,7 @@ def trim_rule(word, count, min_count):
     else:
         return gensim.utils.RULE_DEFAULT
 
-def word2vec(dataname, data_dir='../../data/', num_thread=4):
+def word2vec(dataname, data_dir='../data/', num_thread=4):
     print('%s starts!'%dataname)
     corpus_file = data_dir + dataname + '/corpus.txt'
     eid2embed_file = data_dir + dataname + '/eid2embed.txt'
