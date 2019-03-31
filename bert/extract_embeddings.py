@@ -6,24 +6,18 @@ Created on Fri Mar 29 21:50:12 2019
 """
 
 
-import collections
 from tqdm import tqdm
 import logging
-import json
-from joblib import Parallel, delayed
 import time
 import pickle
 import numpy as np
 import re
 import mmap
-from operator import itemgetter
-
 
 import torch
-from torch.utils.data import TensorDataset, DataLoader, SequentialSampler
-
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from pytorch_pretrained_bert.modeling import BertModel
+
 
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
                     datefmt = '%m/%d/%Y %H:%M:%S',
@@ -38,6 +32,7 @@ def get_num_lines(file_path):
     while buf.readline():
         lines += 1
     return lines
+
 
 def get_sent_info(raw_line, intersection, sent_id, max_seq_length):
 
