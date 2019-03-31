@@ -16,7 +16,7 @@ import warnings
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def evaluate_per_query(result, groundtruth):
+def evaluate_per_query(result, groundtruth, verbose=False):
     if len(result) == 0:
         return {'AveP': 0.0, 'F1': 0.0, 'Jaccard': 0.0, 'Precision': 0.0, 'Recall': 0.0, 'PR_P': [0.0] * 20,
                 'PR_R': [0.0] * 20}
@@ -39,14 +39,16 @@ def evaluate_per_query(result, groundtruth):
     recall = hit / len(groundtruth)
     F1 = 2 * precision * recall / (precision + recall) if precision + recall > 0.0 else 0.0
     jaccard = len(set(result) & set(groundtruth)) / (len(result) + len(groundtruth) - len(set(result) & set(groundtruth)))
-    print('Recall list =', rs)
-    print('Precision list =', ps)
-    print('Precision={0:.6f}  Recall={1:.6f}'.format(precision, recall))
-    print('AveP={0:.6f}  F1={1:.6f}  Jaccard={2:.6f}'.format(avep, F1, jaccard))
+
+    if verbose:
+        print('Recall list =', rs)
+        print('Precision list =', ps)
+        print('Precision={0:.6f}  Recall={1:.6f}'.format(precision, recall))
+        print('AveP={0:.6f}  F1={1:.6f}  Jaccard={2:.6f}'.format(avep, F1, jaccard))
     return {'AveP': avep, 'F1': F1, 'Jaccard': jaccard, 'Precision': precision, 'Recall': recall, 'PR_P': ps, 'PR_R': rs}
 
 
-def evaluate_corpus(dataname='NYT', json_dir='./results_baseline/'):
+def evaluate_corpus(dataname='NYT', json_dir='./results_baseline/', algo='bert'):
 
     mAPs = {'mAP10':[], 'mAP20':[], 'mAP50':[], 'mAP100':[]}
     class_order = []
@@ -68,7 +70,7 @@ def evaluate_corpus(dataname='NYT', json_dir='./results_baseline/'):
     for k, v in mAPs.items():
         m_mAP['m_'+k] = np.mean(v)
 
-    with open(dataname+'-stats.txt', 'w') as f:
+    with open(algo + '_' + dataname+'-stats.txt', 'w') as f:
         f.write(str(m_mAP).replace(',', '\n'))
         f.write('\n-----------------------------------------------')
         f.write('-----------------------------------------------\n')
@@ -112,6 +114,7 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
     all_terms = []
     all_embs = np.zeros((num_terms, emb_dim), dtype=np.float16)
     idx = 0
+    print('Generating term embeddings!')
     for i in tqdm(range(num_batches)):
         try:
             bert_embs_batch = pickle.load(fin)
@@ -171,14 +174,13 @@ if __name__ in '__main__':
     if not os.path.isdir('results_baseline'):
         os.mkdir('results_baseline')
 
-
     all_terms, all_embs = generate_term_embeddings(dataname=dataname, data_dir=data_dir, pooling_strategy=pooling_strategy)
-
 
     all_classes = [each.split('class')[1] for each in os.listdir(classes)]
 
     for each_class in all_classes:
-        print('%s in %s evaluation starts!'%(each_class, dataname))
+        print('-----------------------------------------------------------')
+        print('%s in %s evaluation starts!'%(each_class[1:], dataname))
         evaluation_class = classes + 'class' + each_class
         evaluation_query = queries + 'query' + each_class
         filename = 'bert%s_%s.json'%(each_class[:-4], dataname)
@@ -191,9 +193,10 @@ if __name__ in '__main__':
             gt_for_class = [each_term for each_syn_group in gt_for_class for each_term in eval(each_syn_group)]
 
             record = []
-            for query in queries_for_class:
-                print(query)
+            for query in tqdm(queries_for_class):
+#                print(query)
                 result = get_ranked_list(query, all_terms, all_embs, topn=100)
+                # Note in class.txt, terms are like abc||id rather than abc||id||
                 eval_socres = evaluate_per_query([each['term'][:-2] for each in result], gt_for_class)
 
                 record.append({'groundtruth' : gt_for_class, 'seed' : query, 'result' : result, 'eval_scores':eval_socres})
