@@ -133,7 +133,7 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
     fin.close()
     assert len(all_terms) == all_embs.shape[0]
 
-    # Slow to save. Memory issue.
+    # Slow to save. Memory overflow.
 #    with open(data_dir + dataname + '/bert_term_embeddings.pickle', 'wb') as fout:
 #        pickle.dump([all_terms, all_embs], fout, protocol=4)
 
@@ -146,7 +146,9 @@ def get_ranked_list(query, all_terms, all_embs, topn=100):
         avg_emb[idx] = np.mean(all_embs[np.argwhere(each_term + '||' == all_terms).reshape(-1)], axis=0)
     avg_emb = np.mean(avg_emb, axis=0, keepdims=True)
 
+    # Memory overflow.
 #    scores = cosine_similarity(avg_emb, all_embs).reshape(-1)
+    # Naive implementation, slow but doesn't require much memory.
     scores = np.stack([cosine_similarity(avg_emb, each_emb.reshape(1, -1)).reshape(-1) for each_emb in all_embs]).reshape(-1)
 
     ranked_index = np.argsort(-scores)
