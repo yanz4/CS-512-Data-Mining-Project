@@ -146,7 +146,9 @@ def get_ranked_list(query, all_terms, all_embs, topn=100):
         avg_emb[idx] = np.mean(all_embs[np.argwhere(each_term + '||' == all_terms).reshape(-1)], axis=0)
     avg_emb = np.mean(avg_emb, axis=0, keepdims=True)
 
-    scores = cosine_similarity(avg_emb, all_embs).reshape(-1)
+#    scores = cosine_similarity(avg_emb, all_embs).reshape(-1)
+    scores = np.stack([cosine_similarity(avg_emb, each_emb.reshape(1, -1)).reshape(-1) for each_emb in all_embs]).reshape(-1)
+
     ranked_index = np.argsort(-scores)
     ranked_list = all_terms[ranked_index]
     ranked_scores = scores[ranked_index]
