@@ -143,9 +143,15 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
 
 def get_ranked_list(query, all_terms, all_embs, topn=100):
     avg_emb = np.zeros((len(query), all_embs.shape[1]))
+    fill_mean = np.mean(all_embs, axis=0)
     for idx, each_term in enumerate(query):
-        # TODO Known bug: avg_emb[idx] could be empty if there exist <UNK>.
-        avg_emb[idx] = np.mean(all_embs[np.argwhere(each_term + '||' == all_terms).reshape(-1)], axis=0)
+        # idx_of_term_embs could be empty if there exists UNK, so fill UNK using the mean of all extracted embeddings.
+        idx_of_term_embs = np.argwhere(each_term + '||' == all_terms).reshape(-1)
+        if idx_of_term_embs.shape[0] != 0:
+            avg_emb[idx] = np.mean(all_embs[idx_of_term_embs], axis=0)
+        else:
+            avg_emb[idx] = fill_mean.copy()
+
     avg_emb = np.mean(avg_emb, axis=0, keepdims=True)
 
     # Memory overflow.
@@ -189,6 +195,10 @@ if __name__ in '__main__':
         evaluation_class = classes + 'class' + each_class
         evaluation_query = queries + 'query' + each_class
         filename = 'bert%s_%s.json'%(each_class[:-4], dataname)
+
+        if filename in os.listdir('results_baseline'):
+            print('%s exists! Skip this class!')
+            continue
 
         with open('results_baseline/' + filename, 'w') as fout:
             queries_for_class = open(evaluation_query, 'r', encoding='utf8').read().strip().split('\n')
