@@ -144,7 +144,7 @@ def extract_embeddings(dataname, layer_indexes=[-1,-2,-3,-4], bert_model='bert-l
 
 
 if __name__ == '__main__':
-    dataname='NYT'
+    dataname='Wiki'
     layer_indexes=[-1,-2,-3,-4]
     bert_model='bert-base-uncased'
     max_seq_length=128

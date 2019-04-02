@@ -70,7 +70,7 @@ def evaluate_corpus(dataname='NYT', json_dir='./results_baseline/', algo='bert')
     for k, v in mAPs.items():
         m_mAP['m_'+k] = np.mean(v)
 
-    with open(algo + '_' + dataname+'-stats.txt', 'w') as f:
+    with open(algo + '_' + dataname + '-stats.txt', 'w') as f:
         f.write(str(m_mAP).replace(',', '\n'))
         f.write('\n-----------------------------------------------')
         f.write('-----------------------------------------------\n')
@@ -107,6 +107,7 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
 
     pickle_filename = data_dir + dataname + '/bert_embeddings.pickle'
 
+    print('Calculating the time needed...')
     num_batches, num_terms, emb_dim = get_pickle_info(pickle_filename, pool)
 
     fin = open(pickle_filename, 'rb')
@@ -114,7 +115,7 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
     all_terms = []
     all_embs = np.zeros((num_terms, emb_dim), dtype=np.float16)
     idx = 0
-    print('Generating term embeddings!')
+    print('Generating term embeddings...')
     for i in tqdm(range(num_batches)):
         try:
             bert_embs_batch = pickle.load(fin)
@@ -143,6 +144,7 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
 def get_ranked_list(query, all_terms, all_embs, topn=100):
     avg_emb = np.zeros((len(query), all_embs.shape[1]))
     for idx, each_term in enumerate(query):
+        # TODO Known bug: avg_emb[idx] could be empty if there exist <UNK>.
         avg_emb[idx] = np.mean(all_embs[np.argwhere(each_term + '||' == all_terms).reshape(-1)], axis=0)
     avg_emb = np.mean(avg_emb, axis=0, keepdims=True)
 
@@ -170,11 +172,10 @@ def get_ranked_list(query, all_terms, all_embs, topn=100):
 
 if __name__ in '__main__':
     data_dir='../data/'
-    dataname='NYT'
+    dataname='Wiki'
     pooling_strategy = 'mean'
     classes = data_dir + dataname + '/classes/'
     queries = data_dir + dataname + '/queries/'
-    out_filename = dataname + '_bert_baseline.json'
     if not os.path.isdir('results_baseline'):
         os.mkdir('results_baseline')
 
