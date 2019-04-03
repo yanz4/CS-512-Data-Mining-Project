@@ -1,0 +1,5 @@
+[['california||m.01n7q', 'calif||m.01n7q'], ['nevada||m.059_c', 'nev||m.059_c'], ['new_jersey||m.05fjf', 'nj||m.05fjf'], ['wash||m.081yw', 'washington||m.081yw'], ['ill||m.03v0t', 'illinois||m.03v0t']]
+[['mass.||m.05k7sb', 'massachusetts||m.05k7sb'], ['ill||m.03v0t', 'illinois||m.03v0t'], ['nevada||m.059_c', 'nev||m.059_c'], ['ct||m.01x73', 'connecticut||m.01x73'], ['wash||m.081yw', 'washington||m.081yw']]
+[['nevada||m.059_c', 'nev||m.059_c'], ['new_jersey||m.05fjf', 'nj||m.05fjf'], ['ct||m.01x73', 'connecticut||m.01x73'], ['mass.||m.05k7sb', 'massachusetts||m.05k7sb'], ['texas||m.07b_l', 'lone_star_state||m.07b_l']]
+[['nevada||m.059_c', 'nev||m.059_c'], ['ne||m.05fhy', 'nebraska||m.05fhy'], ['ct||m.01x73', 'connecticut||m.01x73'], ['california||m.01n7q', 'calif||m.01n7q'], ['mass.||m.05k7sb', 'massachusetts||m.05k7sb']]
+[['texas||m.07b_l', 'lone_star_state||m.07b_l'], ['ill||m.03v0t', 'illinois||m.03v0t'], ['ariz||m.0vmt', 'arizona||m.0vmt'], ['nevada||m.059_c', 'nev||m.059_c'], ['ct||m.01x73', 'connecticut||m.01x73']]
