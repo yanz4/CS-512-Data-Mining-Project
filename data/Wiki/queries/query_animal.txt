@@ -1,0 +1,5 @@
+[['chimpanzee||m.0kjxx', 'chimp||m.0kjxx'], ['deer||m.09kx5', 'cervidae||m.09kx5'], ['reptile||m.06bt6', 'reptiles||m.06bt6'], ['panthera_leo||m.096mb', 'lion||m.096mb'], ['domestic_dog||m.0bt9lr', 'dog||m.0bt9lr']]
+[['amphibian||m.0hjf', 'amphibians||m.0hjf'], ['bunny||m.06mf6', 'rabbit||m.06mf6'], ['reptile||m.06bt6', 'reptiles||m.06bt6'], ['felis_catus||m.01yrx', 'house_cat||m.01yrx'], ['panda||m.03bj1', 'giant_panda||m.03bj1']]
+[['panthera_leo||m.096mb', 'lion||m.096mb'], ['domestic_dog||m.0bt9lr', 'dog||m.0bt9lr'], ['hog||m.068zj', 'sus||m.068zj'], ['wild_cat||m.01nq_x', 'wildcat||m.01nq_x'], ['reptile||m.06bt6', 'reptiles||m.06bt6']]
+[['domestic_dog||m.0bt9lr', 'dog||m.0bt9lr'], ['german_shepherd||m.0km5c', 'german_shepherd_dog||m.0km5c'], ['panda||m.03bj1', 'giant_panda||m.03bj1'], ['passerine||m.0cjvf', 'passeriformes||m.0cjvf'], ['reptile||m.06bt6', 'reptiles||m.06bt6']]
+[['panthera_leo||m.096mb', 'lion||m.096mb'], ['sheltie||m.0182yx', 'shetland_sheepdog||m.0182yx'], ['amphibian||m.0hjf', 'amphibians||m.0hjf'], ['cow||m.01xq0k1', 'cattle||m.01xq0k1'], ['wild_cat||m.01nq_x', 'wildcat||m.01nq_x']]

@@ -1,0 +1,5 @@
+[['massachusetts||m.05k7sb', 'mass.||m.05k7sb', 'ma||m.05k7sb'], ['ut||m.07srw', 'utah||m.07srw'], ['tn||m.07h34', 'tennessee||m.07h34'], ['ct||m.01x73', 'connecticut||m.01x73'], ['md||m.04rrd', 'maryland||m.04rrd']]
+[['ga||m.0d0x8', 'georgia||m.0d0x8'], ['south_carolina||m.06yxd', 'sc||m.06yxd'], ['wyoming||m.0846v', 'wy||m.0846v'], ['ms||m.04tgp', 'mississippi||m.04tgp'], ['washington||m.081yw', 'wa||m.081yw']]
+[['ut||m.07srw', 'utah||m.07srw'], ['ks||m.0488g', 'kansas||m.0488g'], ['az||m.0vmt', 'arizona||m.0vmt'], ['tn||m.07h34', 'tennessee||m.07h34'], ['al||m.0gyh', 'alabama||m.0gyh']]
+[['michigan||m.04rrx', 'mi||m.04rrx'], ['al||m.0gyh', 'alabama||m.0gyh'], ['ks||m.0488g', 'kansas||m.0488g'], ['ut||m.07srw', 'utah||m.07srw'], ['south_carolina||m.06yxd', 'sc||m.06yxd']]
+[['mt||m.050l8', 'montana||m.050l8'], ['ms||m.04tgp', 'mississippi||m.04tgp'], ['al||m.0gyh', 'alabama||m.0gyh'], ['michigan||m.04rrx', 'mi||m.04rrx'], ['washington||m.081yw', 'wa||m.081yw']]

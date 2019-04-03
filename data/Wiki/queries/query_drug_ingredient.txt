@@ -1,0 +1,5 @@
+[['valium||m.01j3v_', 'diazepam||m.01j3v_'], ['iron||m.025rw19', 'fe||m.025rw19'], ['thc||m.0gjwh', 'dronabinol||m.0gjwh'], ['risperidone||m.019bht', 'risperdal||m.019bht'], ['thiamine||m.07hnp', 'vitamin_b1||m.07hnp']]
+[['gold||m.025rs2z', 'au||m.025rs2z'], ['hydrochloric_acid||m.0dc0x', 'muriatic_acid||m.0dc0x'], ['carbonates||m.01s9f', 'carbonate||m.01s9f'], ['bicarbonate||m.019dq', 'hydrogen_carbonate||m.019dq'], ['baking_soda||m.014dn0', 'sodium_bicarbonate||m.014dn0']]
+[['lye||m.0fw77', 'caustic_soda||m.0fw77'], ['threonine||m.0h1zw', 'thr||m.0h1zw'], ['hydrocortisone||m.01xf7l', 'cortisol||m.01xf7l'], ['l-tryptophan||m.0fzjh', 'tryptophan||m.0fzjh'], ['fluorine||m.025rqc3', 'fluoride||m.025rqc3']]
+[['gleevec||m.02q6kr', 'imatinib||m.02q6kr'], ['apple_tree||m.014j1m', 'apple||m.014j1m'], ['lye||m.0fw77', 'caustic_soda||m.0fw77'], ['monosodium_glutamate||m.0gv88', 'msg||m.0gv88'], ['glycerol||m.01781c', 'glycerin||m.01781c']]
+[['chlorine||m.025tkqp', 'chloride||m.025tkqp'], ['dopamine||m.0c_3s', 'da||m.0c_3s'], ['maize||m.053wn', 'corn||m.053wn'], ['zn||m.025sqz8', 'zinc||m.025sqz8'], ['bicarbonate||m.019dq', 'hydrogen_carbonate||m.019dq']]
