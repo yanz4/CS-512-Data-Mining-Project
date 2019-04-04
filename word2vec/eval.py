@@ -84,35 +84,26 @@ def evaluate_corpus(dataname='NYT', json_dir='./results_baseline/', algo='word2v
 
 
 def get_ranked_list(query, all_terms, all_embs, topn=100):
-    avg_emb = np.zeros((len(query), all_embs.shape[1]))
+    query_emb = np.zeros((len(query), all_embs.shape[1]))
     fill_mean = np.mean(all_embs, axis=0)
     for idx, each_term in enumerate(query):
         # idx_of_term_embs could be empty if there exists UNK, so fill UNK using the mean of all extracted embeddings.
         idx_of_term_embs = np.argwhere(each_term + '||' == all_terms).reshape(-1)
         if idx_of_term_embs.shape[0] != 0:
-            avg_emb[idx] = np.mean(all_embs[idx_of_term_embs], axis=0)
+            query_emb[idx] = np.mean(all_embs[idx_of_term_embs], axis=0)
         else:
-            avg_emb[idx] = fill_mean.copy()
+            query_emb[idx] = fill_mean.copy()
 
-    avg_emb = np.mean(avg_emb, axis=0, keepdims=True)
+    query_emb = np.mean(query_emb, axis=0, keepdims=True)
 
-    # Memory overflow.
-    #    scores = cosine_similarity(avg_emb, all_embs).reshape(-1)
-    # Naive implementation, slow but doesn't require much memory.
-    scores = np.stack(
-        [cosine_similarity(avg_emb, each_emb.reshape(1, -1)).reshape(-1) for each_emb in all_embs]).reshape(-1)
+    scores = cosine_similarity(query_emb, all_embs).reshape(-1)
+#    scores = np.stack(
+#        [cosine_similarity(query_emb, each_emb.reshape(1, -1)).reshape(-1) for each_emb in all_embs]).reshape(-1)
 
     ranked_index = np.argsort(-scores)
-    print(ranked_index)
-    ranked_list = []
-    ranked_scores = []
-    for i in ranked_index:
-        ranked_list.append(all_terms[int(i)])
-        ranked_scores.append(scores[int(i)])
 
-        '''all_terms[ranked_index]'''
-
-    '''scores[ranked_index]'''
+    ranked_list = all_terms[ranked_index]
+    ranked_scores = scores[ranked_index]
 
     idx = 0
     res = []
@@ -123,23 +114,36 @@ def get_ranked_list(query, all_terms, all_embs, topn=100):
             unique_topn.append(term)
             res.append({'term': term, 'score': ranked_scores[idx]})
         idx += 1
-
     return res
 
 
 def generate_term_embeddings(dataname, data_dir='../data/'):
     model = Word2Vec.load(data_dir + dataname + '/' + "word2vec.pth", mmap='r')
-    word_vectors = model.wv
-    all_terms = list(word_vectors.vocab.keys())
-    all_embs = word_vectors[all_terms]
-    all_embs = np.array(all_embs)
-    all_terms = np.array(all_terms)
+    vocab = open(data_dir + dataname + './vocab.txt', 'r', encoding='utf8').read().strip().split('\n')
+
+    fill_mean = np.mean(model.wv[list(model.wv.vocab.keys())], axis=0)
+
+    all_terms = np.array([each_term.split('\t')[0]+'||' for each_term in vocab])
+
+    all_embs = []
+    for each_term in all_terms:
+        try:
+            all_embs.append(model.wv[each_term])
+        except KeyError:
+            all_embs.append(fill_mean)
+    all_embs = np.stack(all_embs)
+
+#    word_vectors = model.wv
+#    all_terms = list(word_vectors.vocab.keys())
+#    all_embs = word_vectors[all_terms]
+#    all_embs = np.array(all_embs)
+#    all_terms = np.array(all_terms)
     return all_terms, all_embs
 
 
 if __name__ in '__main__':
     data_dir = '../data/'
-    dataname = 'NYT'
+    dataname = 'Wiki'
     classes = data_dir + dataname + '/classes/'
     queries = data_dir + dataname + '/queries/'
     if not os.path.isdir('results_baseline'):
@@ -171,7 +175,6 @@ if __name__ in '__main__':
             record = []
             for query in tqdm(queries_for_class):
                 result = get_ranked_list(query, all_terms, all_embs, topn=100)
-                print(result)
                 # Note in class.txt, terms are like abc||id rather than abc||id||
                 eval_socres = evaluate_per_query([each['term'][:-2] for each in result], gt_for_class)
 

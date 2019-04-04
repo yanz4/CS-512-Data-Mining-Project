@@ -142,22 +142,22 @@ def generate_term_embeddings(dataname, data_dir='../data/', pooling_strategy='me
 
 
 def get_ranked_list(query, all_terms, all_embs, topn=100):
-    avg_emb = np.zeros((len(query), all_embs.shape[1]))
+    query_emb = np.zeros((len(query), all_embs.shape[1]))
     fill_mean = np.mean(all_embs, axis=0)
     for idx, each_term in enumerate(query):
         # idx_of_term_embs could be empty if there exists UNK, so fill UNK using the mean of all extracted embeddings.
         idx_of_term_embs = np.argwhere(each_term + '||' == all_terms).reshape(-1)
         if idx_of_term_embs.shape[0] != 0:
-            avg_emb[idx] = np.mean(all_embs[idx_of_term_embs], axis=0)
+            query_emb[idx] = np.mean(all_embs[idx_of_term_embs], axis=0)
         else:
-            avg_emb[idx] = fill_mean.copy()
+            query_emb[idx] = fill_mean.copy()
 
-    avg_emb = np.mean(avg_emb, axis=0, keepdims=True)
+    query_emb = np.mean(query_emb, axis=0, keepdims=True)
 
     # Memory overflow.
-#    scores = cosine_similarity(avg_emb, all_embs).reshape(-1)
+#    scores = cosine_similarity(query_emb, all_embs).reshape(-1)
     # Naive implementation, slow but doesn't require much memory.
-    scores = np.stack([cosine_similarity(avg_emb, each_emb.reshape(1, -1)).reshape(-1) for each_emb in all_embs]).reshape(-1)
+    scores = np.stack([cosine_similarity(query_emb, each_emb.reshape(1, -1)).reshape(-1) for each_emb in all_embs]).reshape(-1)
 
     ranked_index = np.argsort(-scores)
     ranked_list = all_terms[ranked_index]
