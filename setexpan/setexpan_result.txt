@@ -1,0 +1,58 @@
+eid=114450	ename=Canada
+eid=64527	ename=Australia
+eid=222703	ename=Frances
+eid=574965	ename=Spain
+eid=288516	ename=Italy
+eid=594159	ename=Switzerland
+eid=441974	ename=New Zealand
+eid=170137	ename=Denmark
+eid=80983	ename=Belgium
+eid=487833	ename=Poland
+eid=548525	ename=Scotland
+eid=593507	ename=Sweden
+eid=65110	ename=Austria
+eid=408545	ename=Mexico
+eid=451161	ename=Norway
+eid=216697	ename=Finland
+eid=525397	ename=Romania
+eid=490894	ename=Portugal
+eid=285145	ename=Hungary
+eid=636042	ename=turkeys
+eid=572164	ename=South Africa
+eid=297492	ename=Ireland
+eid=253902	ename=Greece
+eid=106876	ename=Bulgaria
+eid=99925	ename=Brazil
+eid=204669	ename=Estonia
+eid=641844	ename=Ukraine
+eid=153539	ename=Croatia
+eid=253035	ename=Great Britain
+eid=567541	ename=Slovenia
+eid=299639	ename=Israel
+eid=370946	ename=Lithuania
+eid=567503	ename=Slovakia
+eid=553311	ename=Serbia
+eid=381615	ename=Luxembourg
+eid=289535	ename=Iceland
+eid=439239	ename=Netherlands
+eid=685933	ename=Yugoslavia
+eid=613621	ename=the Netherlands
+eid=279382	ename=Holland
+eid=156651	ename=Czechoslovakia
+eid=388820	ename=Malta
+eid=97358	ename=Bosnia and Herzegovina
+eid=643778	ename=United Kingdom
+eid=604663	ename=Thailand
+eid=360492	ename=Latvia
+eid=384805	ename=Macedonia
+eid=563302	ename=Singapore
+eid=34131	ename=Albania
+eid=55823	ename=Argentina
+eid=419869	ename=Moldova
+eid=421466	ename=Montenegro
+eid=350231	ename=Korea
+eid=156568	ename=Czech Republic
+eid=80704	ename=Belarus
+eid=423090	ename=Morocco
+eid=239518	ename=Georgia
+eid=368235	ename=Liechtenstein
